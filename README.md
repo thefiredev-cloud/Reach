@@ -12,14 +12,23 @@
 <p align="center">
   <img src="https://img.shields.io/github/v/release/alexandrosnt/Reach?style=flat-square&color=0a84ff" alt="Release" />
   <img src="https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-333?style=flat-square" alt="Platforms" />
-  <img src="https://img.shields.io/github/license/alexandrosnt/Reach?style=flat-square?cacheSeconds=60" alt="License" />
+  <img src="https://img.shields.io/github/license/alexandrosnt/Reach?style=flat-square&cacheSeconds=60" alt="License" />
 </p>
 
 <p align="center">
   <a href="https://alexandrosnt.github.io/Reach/"><strong>Documentation</strong></a> · <a href="https://github.com/alexandrosnt/Reach/releases">Download</a> · <a href="https://github.com/alexandrosnt/Reach/issues">Report a Bug</a>
 </p>
 
-> **About this fork.** This is a fork of [alexandrosnt/Reach](https://github.com/alexandrosnt/Reach), which is the canonical project for releases, issues, and docs. The fork carries three fixes on top of an older upstream: terminal copy and paste no longer intercepted by the default Tauri menu, the vault password can be set and changed (upstream issue #25), and a persistent marketplace registry URL. It is behind upstream and is not a separate distribution.
+> **About this fork.** This is a fork of [alexandrosnt/Reach](https://github.com/alexandrosnt/Reach). Upstream is canonical for releases, issues, documentation and the current feature set. Issues are disabled here, so file bugs upstream.
+>
+> The fork is based on upstream v0.4.9 (upstream has since reached v0.7.6) and adds four changes on top of that snapshot:
+>
+> - **macOS terminal copy and paste.** The default Tauri menu bound Cmd+C and Cmd+V to its own Copy and Paste items and swallowed the keys before the terminal saw them. The fork builds a custom macOS menu whose Copy and Paste items have no accelerators and handles the keys in `Terminal.svelte`. It also vendors OpenSSL (`openssl-sys`) so the app builds without system OpenSSL headers. Upstream later fixed Cmd+V its own way in a newer release.
+> - **Vault password.** Setting or changing the vault password never worked in this snapshot, because the encrypted key was discarded at identity creation (upstream issue #25). The fork keeps the encrypted key, adds `VaultManager::change_password`, and returns a clear error when no password is set. Two unit tests cover it.
+> - **Marketplace registry URL.** The registry URL override is saved in the encrypted settings vault and reloaded on startup. The Marketplace panel has a gear icon to edit or reset it. The default registry is still upstream's. A seeded registry with three plugins lives in [reach-plugins-registry](https://github.com/thefiredev-cloud/reach-plugins-registry).
+> - **Support link.** A `.github/FUNDING.yml` and a link in Settings → General point to the MeshVault skills pack storefront, because GitHub Sponsors is not enabled on this account.
+>
+> Installers and auto-updates come from upstream and do not include these changes. Build this fork from source to get them. `src-tauri/Cargo.toml` still carries the `LicenseRef-Reach-SAL` identifier from before upstream's v0.7.4 correction; the `LICENSE` file is MIT.
 
 ---
 
@@ -47,7 +56,7 @@ Reach is what happens when you build an SSH client from scratch with a native UI
 ### Productivity
 
 - **Port Tunneling** · Local, remote, and dynamic SOCKS forwarding. Set it up once, save it with the session.
-- **Multi-Exec** · Broadcast the same command to 10 servers at once. Handy for fleet updates.
+- **Snippets** · Save the commands you keep retyping and complete them with Tab.
 - **System Monitoring** · Live CPU, memory, and disk stats from connected hosts without installing agents.
 
 ### Infrastructure as Code
@@ -60,6 +69,7 @@ Reach is what happens when you build an SSH client from scratch with a native UI
 - **Serial Console** · Talk to routers, switches, and embedded devices over COM/TTY.
 - **AI Assistant** · Optional AI integration for command suggestions and troubleshooting (bring your own API key).
 - **Encrypted Vault** · Store secrets, credentials, and SSH keys in an encrypted vault with cloud sync support.
+- **Host Key Verification** · Trust on first use, with a warning when a known host presents a different key.
 - **Lua Plugins** · Extend Reach with sandboxed Lua scripts. Access SSH, storage, and UI hooks through the host API.
 - **Auto-Updates** · The app checks for updates on startup and periodically while running. No manual downloads.
 
@@ -78,7 +88,7 @@ Reach is a [Tauri v2](https://v2.tauri.app) app with a Rust backend and Svelte 5
 
 ## Getting started
 
-Grab the latest release from the [Releases page](https://github.com/alexandrosnt/Reach/releases). Installers are available for Windows (NSIS), macOS (.dmg), Linux (.deb, .AppImage, .rpm), and Android (.apk).
+Releases are published by the [upstream project](https://github.com/alexandrosnt/Reach/releases), not by this fork, and they do not contain the fork's changes. Installers there cover Windows (NSIS), macOS (.dmg), Linux (.deb, .AppImage, .rpm), and Android (.apk). To run the fork, build it from source.
 
 ## Building from source
 
@@ -116,7 +126,7 @@ graph LR
   lib --> i18n["📄 i18n · Internationalization"]
 
   components --> layout["📄 layout · AppShell, TitleBar, Sidebar"]
-  components --> terminal["📄 terminal · SSH terminal, multi-exec"]
+  components --> terminal["📄 terminal · SSH terminal, split panes, monitoring bar"]
   components --> explorer["📄 explorer · SFTP file browser"]
   components --> sessions["📄 sessions · Connection manager"]
   components --> tunnel["📄 tunnel · Port forwarding UI"]
@@ -169,7 +179,7 @@ Thanks to those who have contributed to Reach:
 
 ## Contributing
 
-Contributions are welcome. Bug reports, feature ideas, and pull requests all help. If you're picking up a larger feature, open an issue first so we can talk about the approach.
+Contributions are welcome upstream. Bug reports, feature ideas, and pull requests all help. If you're picking up a larger feature, open an issue first so we can talk about the approach.
 
 ## License
 ### Licensed under the MIT License.
