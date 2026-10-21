@@ -592,7 +592,12 @@ pub fn run() {
             //
             // When the user clicks Edit > Copy / Paste we emit an event to the
             // webview; the webview forwards it to the active terminal.
-            #[cfg(desktop)]
+            //
+            // macOS only: Tauri draws a menu bar inside the window on Linux and
+            // Windows, where the app already has its own frameless title bar
+            // (`decorations: false`), and those platforms never had the
+            // default-menu accelerator problem.
+            #[cfg(target_os = "macos")]
             {
                 use tauri::menu::{
                     MenuBuilder, SubmenuBuilder, MenuItemBuilder, PredefinedMenuItem,

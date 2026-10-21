@@ -28,7 +28,7 @@
 > - **Marketplace registry URL.** The registry URL override is saved in the encrypted settings vault and reloaded on startup. The Marketplace panel has a gear icon to edit or reset it. The default registry is still upstream's. A seeded registry with three plugins lives in [reach-plugins-registry](https://github.com/thefiredev-cloud/reach-plugins-registry).
 > - **Support link.** A link in Settings → General points to the MeshVault skills pack storefront, because GitHub Sponsors is not enabled on this account. The repository's `.github/FUNDING.yml` is upstream's own file, so the Sponsor button on this fork goes to upstream's maintainer.
 >
-> Installers and auto-updates come from upstream and do not include these changes. Build this fork from source to get them. `src-tauri/Cargo.toml` still carries the `LicenseRef-Reach-SAL` identifier from before upstream's v0.7.4 correction; the `LICENSE` file is MIT.
+> Installers and auto-updates from upstream do not include these changes. Build this fork from source to get them, or download the unsigned CI artifacts from the [Build workflow](https://github.com/thefiredev-cloud/Reach/actions/workflows/build.yml). The fork's bundle identifier is `com.thefiredev.reach` and its publisher is The Fire Dev LLC, so the operating system registers a fork build as a different app from upstream's `com.reach.desktop`. The in-app updater is disabled in this fork (`plugins.updater.endpoints` is empty): it would otherwise pull upstream releases over the fork. License metadata is MIT in `LICENSE`, `src-tauri/Cargo.toml` and `tauri.conf.json`, matching upstream's v0.7.4 correction.
 
 ---
 
@@ -71,7 +71,7 @@ Reach is what happens when you build an SSH client from scratch with a native UI
 - **Encrypted Vault** · Store secrets, credentials, and SSH keys in an encrypted vault with cloud sync support.
 - **Host Key Verification** · Trust on first use, with a warning when a known host presents a different key.
 - **Lua Plugins** · Extend Reach with sandboxed Lua scripts. Access SSH, storage, and UI hooks through the host API.
-- **Auto-Updates** · The app checks for updates on startup and periodically while running. No manual downloads.
+- **Auto-Updates** · Upstream builds check for updates on startup and periodically while running. This fork ships with the updater disabled (see the fork note above).
 
 ## Tech
 
