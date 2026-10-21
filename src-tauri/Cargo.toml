@@ -2,9 +2,11 @@
 name = "reach"
 version = "0.4.9"
 description = "Cross-platform SSH & Remote Management Tool"
-authors = ["Reach Contributors"]
+authors = ["Reach Contributors", "The Fire Dev LLC"]
 edition = "2021"
-license = "LicenseRef-Reach-SAL"
+license = "MIT"
+homepage = "https://github.com/thefiredev-cloud/Reach"
+repository = "https://github.com/thefiredev-cloud/Reach"
 
 [lib]
 name = "reach_lib"
