@@ -177,6 +177,35 @@ Thanks to those who have contributed to Reach:
   </tr>
 </table>
 
+<!-- arch:begin -->
+## Architecture
+
+A Tauri v2 SSH client: a Svelte 5 UI over a Rust backend that holds the SSH stack, an encrypted vault and a sandboxed Lua plugin host.
+
+```mermaid
+flowchart LR
+  user(["Engineer"]):::actor
+  ui["Svelte UI<br/>SPA in a system webview"]:::app
+  rust["Rust backend<br/>Tauri commands, Tokio"]:::app
+  ssh["SSH, SFTP, tunnels<br/>russh"]:::app
+  vault[("Encrypted vault<br/>secrets, sessions")]:::store
+  plugins["Lua plugin sandbox<br/>permissioned"]:::app
+  hosts{{"Remote hosts<br/>your servers"}}:::ext
+  user -->|"uses"| ui
+  ui -->|"invoke + events"| rust
+  rust -->|"connects"| ssh
+  ssh -->|"SSH"| hosts
+  rust -->|"credentials"| vault
+  rust -->|"hooks"| plugins
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+  classDef store fill:#bbf7d0,stroke:#15803d,color:#0b1220
+```
+
+[Full architecture](docs/ARCHITECTURE.md) · Hi-res: [SVG](docs/architecture/whiteboard.svg) · [PNG 3x](docs/architecture/whiteboard@3x.png) · [dark PNG](docs/architecture/whiteboard.dark@3x.png) · [Explorable (Archify)](docs/architecture/Reach.archify.html) · [Graphify report](docs/architecture/graphify/GRAPH_REPORT.md)
+<!-- arch:end -->
+
 ## Contributing
 
 Contributions are welcome upstream. Bug reports, feature ideas, and pull requests all help. If you're picking up a larger feature, open an issue first so we can talk about the approach.

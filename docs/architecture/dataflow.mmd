@@ -1,0 +1,16 @@
+flowchart LR
+  ui["Svelte UI"]:::app
+  rust["Rust backend"]:::app
+  vault[("Vault db")]:::store
+  kh[("known_hosts.json")]:::store
+  host{{"Remote hosts"}}:::ext
+  turso{{"Turso sync"}}:::ext
+  ui -->|"commands"| rust
+  rust -.->|"events"| ui
+  rust -->|"encrypted"| vault
+  rust -->|"fingerprints"| kh
+  rust -->|"SSH, SFTP"| host
+  vault -.->|"optional"| turso
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+  classDef store fill:#bbf7d0,stroke:#15803d,color:#0b1220

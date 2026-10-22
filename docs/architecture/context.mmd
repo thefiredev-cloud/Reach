@@ -1,0 +1,15 @@
+flowchart LR
+  user(["Engineer using Reach"]):::actor
+  SYSTEM["Reach (fork)<br/>the system in this repo"]:::app
+  hosts{{"Remote SSH hosts"}}:::ext
+  ai{{"AI provider (optional, own key)"}}:::ext
+  registry{{"Plugin registry (raw JSON)"}}:::ext
+  turso{{"Turso (optional vault sync)"}}:::ext
+  user -->|"uses"| SYSTEM
+  SYSTEM -->|"SSH, SFTP"| hosts
+  SYSTEM -.->|"optional sync"| turso
+  SYSTEM -.->|"fetch index"| registry
+  SYSTEM -.->|"assistant calls"| ai
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3

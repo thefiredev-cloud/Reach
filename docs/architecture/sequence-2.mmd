@@ -1,0 +1,14 @@
+sequenceDiagram
+  autonumber
+  actor user as User
+  participant ui as Plugins panel
+  participant pm as PluginManager
+  participant reg as Registry URL
+  participant zip as Release zip
+  user->>ui: open Marketplace tab
+  ui->>pm: fetch registry
+  pm->>reg: GET plugins.json
+  user->>ui: install entry
+  pm->>zip: download downloadUrl
+  Note over pm: sha256 must match before extract
+  pm->>pm: extract in staging dir, load plugin
