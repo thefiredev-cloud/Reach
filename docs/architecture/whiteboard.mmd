@@ -1,0 +1,18 @@
+flowchart LR
+  user(["Engineer"]):::actor
+  ui["Svelte UI<br/>SPA in a system webview"]:::app
+  rust["Rust backend<br/>Tauri commands, Tokio"]:::app
+  ssh["SSH, SFTP, tunnels<br/>russh"]:::app
+  vault[("Encrypted vault<br/>secrets, sessions")]:::store
+  plugins["Lua plugin sandbox<br/>permissioned"]:::app
+  hosts{{"Remote hosts<br/>your servers"}}:::ext
+  user -->|"uses"| ui
+  ui -->|"invoke + events"| rust
+  rust -->|"connects"| ssh
+  ssh -->|"SSH"| hosts
+  rust -->|"credentials"| vault
+  rust -->|"hooks"| plugins
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+  classDef store fill:#bbf7d0,stroke:#15803d,color:#0b1220

@@ -1,0 +1,22 @@
+sequenceDiagram
+  autonumber
+  actor user as User
+  participant ui as Svelte UI
+  participant rust as Rust ssh client
+  participant vault as Vault
+  participant host as Remote host
+  participant plug as Plugins
+  user->>ui: open saved session
+  ui->>rust: invoke connect
+  rust->>vault: read credentials
+  rust->>host: SSH handshake
+  host-->>rust: server public key
+  alt fingerprint matches known_hosts.json
+    rust->>host: authenticate
+  else unknown or changed key
+    rust->>ui: ssh-hostkey-prompt event
+    ui->>user: verify fingerprint
+    user->>rust: trust or reject
+  end
+  rust->>plug: session:connected hook
+  rust-)ui: terminal output events

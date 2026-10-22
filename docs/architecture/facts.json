@@ -1,0 +1,330 @@
+{
+ "repo": "Reach",
+ "files_tracked": 357,
+ "head": "2fb39e359bdf204b48bc8ebb9d8f4b2355571ecc",
+ "origin": "https://github.com/thefiredev-cloud/Reach.git",
+ "default_branch": "main",
+ "languages": [
+  [
+   ".svelte",
+   102
+  ],
+  [
+   ".rs",
+   80
+  ],
+  [
+   ".png",
+   53
+  ],
+  [
+   ".ts",
+   47
+  ],
+  [
+   ".md",
+   31
+  ],
+  [
+   ".json",
+   17
+  ],
+  [
+   ".yml",
+   4
+  ],
+  [
+   ".mjs",
+   2
+  ]
+ ],
+ "readme": "README.md",
+ "readme_first_paragraph": "Most SSH tools feel like they were designed in 2005, because they were. MobaXterm is Windows-only and bloated, PuTTY hasn't changed in decades, and Termius wants a subscription for basic features.",
+ "top_dirs": [
+  ".github",
+  "assets",
+  "docs",
+  "scripts",
+  "src",
+  "src-tauri",
+  "static"
+ ],
+ "manifests": [
+  {
+   "path": "docs/package.json",
+   "kind": "npm",
+   "name": "docs"
+  },
+  {
+   "path": "package.json",
+   "kind": "npm",
+   "name": "reach"
+  },
+  {
+   "path": "src-tauri/Cargo.toml",
+   "kind": "cargo",
+   "name": "reach"
+  }
+ ],
+ "libs": [
+  {
+   "category": "web",
+   "label": "Svelte",
+   "dep": "svelte",
+   "manifest": "package.json"
+  },
+  {
+   "category": "web",
+   "label": "Vite",
+   "dep": "vite",
+   "manifest": "package.json"
+  }
+ ],
+ "entry_points": [
+  {
+   "kind": "script",
+   "name": "start",
+   "path": "astro dev",
+   "from": "docs/package.json"
+  },
+  {
+   "kind": "script",
+   "name": "dev",
+   "path": "astro dev",
+   "from": "docs/package.json"
+  },
+  {
+   "kind": "script",
+   "name": "build",
+   "path": "astro build",
+   "from": "docs/package.json"
+  },
+  {
+   "kind": "script",
+   "name": "dev",
+   "path": "vite dev",
+   "from": "package.json"
+  },
+  {
+   "kind": "script",
+   "name": "build",
+   "path": "vite build",
+   "from": "package.json"
+  },
+  {
+   "kind": "main",
+   "count": 1,
+   "paths": [
+    "src-tauri/src/main.rs"
+   ]
+  },
+  {
+   "kind": "scripts",
+   "count": 2,
+   "paths": [
+    "scripts/extract-icons.mjs",
+    "scripts/i18n-check.js"
+   ]
+  }
+ ],
+ "services": [],
+ "deploy_targets": [],
+ "ci_workflows": [
+  {
+   "path": ".github/workflows/build.yml",
+   "name": "Build",
+   "on": [
+    "push",
+    "pull_request",
+    "workflow_dispatch"
+   ],
+   "jobs": [
+    "check",
+    "desktop"
+   ],
+   "deploy_hints": []
+  },
+  {
+   "path": ".github/workflows/docs.yml",
+   "name": "Deploy Docs to GitHub Pages",
+   "on": [
+    "push",
+    "workflow_dispatch"
+   ],
+   "jobs": [
+    "build",
+    "deploy"
+   ],
+   "deploy_hints": [
+    "deploy-pages"
+   ]
+  },
+  {
+   "path": ".github/workflows/release.yml",
+   "name": "Release",
+   "on": [
+    "push"
+   ],
+   "jobs": [
+    "build-desktop",
+    "publish-release",
+    "build-android"
+   ],
+   "deploy_hints": []
+  }
+ ],
+ "cron_and_timers": [],
+ "files_scanned": 254,
+ "external_hosts": [
+  {
+   "host": "github.com",
+   "count": 5,
+   "first": "docs/astro.config.mjs:16"
+  },
+  {
+   "host": "raw.githubusercontent.com",
+   "count": 3,
+   "first": "src-tauri/capabilities/default.json:2"
+  },
+  {
+   "host": "openrouter.ai",
+   "count": 3,
+   "first": "src-tauri/src/ipc/ai_commands.rs:163"
+  },
+  {
+   "host": "astro.build",
+   "count": 1,
+   "first": "docs/astro.config.mjs:5"
+  },
+  {
+   "host": "alexandrosnt.github.io",
+   "count": 1,
+   "first": "docs/astro.config.mjs:7"
+  },
+  {
+   "host": "gitlab.com",
+   "count": 1,
+   "first": "src-tauri/src/tofu/catalog.rs:326"
+  },
+  {
+   "host": "api.github.com",
+   "count": 1,
+   "first": "src-tauri/src/toolchain/install.rs:97"
+  },
+  {
+   "host": "get.opentofu.org",
+   "count": 1,
+   "first": "src-tauri/src/toolchain/install.rs:183"
+  },
+  {
+   "host": "api.turso.tech",
+   "count": 1,
+   "first": "src-tauri/src/vault/turso_api.rs:9"
+  },
+  {
+   "host": "meshvault.ai",
+   "count": 1,
+   "first": "src/lib/components/settings/GeneralTab.svelte:12"
+  }
+ ],
+ "env_var_names": [
+  {
+   "name": "PATH",
+   "first": "src-tauri/src/lib.rs"
+  },
+  {
+   "name": "SHELL",
+   "first": "src-tauri/src/pty/manager.rs"
+  },
+  {
+   "name": "TAURI_DEV_HOST",
+   "first": "vite.config.ts"
+  },
+  {
+   "name": "USER",
+   "first": "src-tauri/src/ssh/config.rs"
+  },
+  {
+   "name": "USERNAME",
+   "first": "src-tauri/src/ssh/config.rs"
+  },
+  {
+   "name": "WEBKIT_DISABLE_DMABUF_RENDERER",
+   "first": "src-tauri/src/lib.rs"
+  }
+ ],
+ "ci_secret_names": [
+  "GITHUB_TOKEN",
+  "TAURI_SIGNING_PRIVATE_KEY",
+  "TAURI_SIGNING_PRIVATE_KEY_PASSWORD"
+ ],
+ "data_store_signals": {
+  "sqlite": [
+   "src-tauri/src/vault/manager.rs:777"
+  ],
+  "postgres": [
+   "src-tauri/src/tofu/backend_catalog.rs:191",
+   "src-tauri/src/vault/schema.rs:10"
+  ],
+  "filesystem vault": [
+   "src-tauri/src/ansible/runner.rs:104",
+   "src-tauri/src/ipc/ansible_commands.rs:16",
+   "src-tauri/src/ipc/credential_commands.rs:26",
+   "src-tauri/src/ipc/marketplace_commands.rs:51"
+  ]
+ },
+ "auth_signals": {
+  "Bearer/Authorization header": [
+   "src-tauri/src/ipc/ai_commands.rs:62",
+   "src-tauri/src/ssh/client.rs:584",
+   "src-tauri/src/tofu/catalog.rs:229"
+  ],
+  "API key header": [
+   "src-tauri/src/ipc/ai_commands.rs:7",
+   "src-tauri/src/ipc/settings_commands.rs:16",
+   "src/lib/components/settings/AITab.svelte:96",
+   "src/lib/i18n/locales/bg.json:502"
+  ],
+  "JWT": [
+   "src-tauri/src/vault/turso_api.rs:83"
+  ],
+  "Auth middleware": [
+   "src-tauri/src/ssh/client.rs:194"
+  ],
+  "Binds loopback only": [
+   "src-tauri/src/ssh/client.rs:678",
+   "src-tauri/src/state.rs:64",
+   "src-tauri/src/tofu/backend_catalog.rs:152",
+   "src-tauri/src/tunnel/manager.rs:108"
+  ],
+  "Binds all interfaces": [
+   "src-tauri/src/tofu/resource_catalog.rs:180",
+   "src-tauri/src/tofu/templates.rs:53"
+  ],
+  "Secrets from env or CI secrets": [
+   ".github/workflows/release.yml:57",
+   "src-tauri/src/plugin/sandbox.rs:58",
+   "vite.config.ts:6"
+  ],
+  "Approval/consent gate": [
+   "src/lib/components/tofu/TofuEnvironmentPanel.svelte:69",
+   "src/lib/components/tofu/TofuStatePanel.svelte:44",
+   "src/lib/components/tofu/TofuWorkspacePanel.svelte:36"
+  ]
+ },
+ "tests": [],
+ "docs_files": [
+  "docs/README.md",
+  "docs/src/content/docs/development/setup.md",
+  "docs/src/content/docs/features/ai-assistant.md",
+  "docs/src/content/docs/features/ansible.md",
+  "docs/src/content/docs/features/file-explorer.md",
+  "docs/src/content/docs/features/jump-hosts.md",
+  "docs/src/content/docs/features/monitoring.md",
+  "docs/src/content/docs/features/opentofu.md",
+  "docs/src/content/docs/features/plugins.md",
+  "docs/src/content/docs/features/serial.md",
+  "docs/src/content/docs/features/sessions.md",
+  "docs/src/content/docs/features/ssh-terminal.md"
+ ]
+}

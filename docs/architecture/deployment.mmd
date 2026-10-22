@@ -1,0 +1,18 @@
+flowchart LR
+  hosts{{"Remote hosts"}}:::ext
+  subgraph host_desk["User's device"]
+    app["Reach app<br/>while running"]:::app
+    data[("App data dir")]:::store
+  end
+  subgraph host_gha["GitHub Actions"]
+    build["Build<br/>push, PR, dispatch"]:::job
+    release["Release<br/>v* tag"]:::job
+    docs["Docs to Pages<br/>push, dispatch"]:::job
+  end
+  app -->|"reads / writes"| data
+  app -->|"SSH"| hosts
+  release -.->|"installers (upstream)"| app
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+  classDef job fill:#fbcfe8,stroke:#be185d,color:#0b1220
+  classDef store fill:#bbf7d0,stroke:#15803d,color:#0b1220

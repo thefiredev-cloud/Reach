@@ -1,0 +1,39 @@
+flowchart TB
+  user(["Engineer using Reach"]):::actor
+  hosts{{"Remote SSH hosts"}}:::ext
+  ai{{"AI provider (optional, own key)"}}:::ext
+  registry{{"Plugin registry (raw JSON)"}}:::ext
+  turso{{"Turso (optional vault sync)"}}:::ext
+  subgraph SYSTEM["Reach (fork)"]
+    ui["Svelte 5 frontend<br/>SvelteKit SPA, Tailwind 4"]:::app
+    ipc["IPC wrappers + commands<br/>invoke() and src-tauri/src/ipc"]:::app
+    state["AppState<br/>Arc‹Mutex› / RwLock managers"]:::app
+    ssh["SSH + SFTP + tunnels<br/>russh, Tokio"]:::app
+    local["PTY, serial, monitoring<br/>desktop-only modules"]:::app
+    iac["Ansible + OpenTofu runners<br/>Rust modules"]:::app
+    vault["Vault<br/>XChaCha20-Poly1305, Argon2id"]:::app
+    plugins["Plugin host<br/>Luau sandbox"]:::app
+    data[("App data directory<br/>OS data dir")]:::store
+    ci["Build, Docs, Release workflows<br/>GitHub Actions"]:::job
+  end
+  user -->|"uses"| ui
+  ui -->|"invoke + events"| ipc
+  ipc -->|"managed state"| state
+  state -->|"SshManager"| ssh
+  state -->|"desktop only"| local
+  state -->|"project managers"| iac
+  state -->|"VaultManager"| vault
+  state -->|"PluginManager"| plugins
+  ssh -->|"SSH, SFTP"| hosts
+  ssh -->|"known_hosts"| data
+  vault -->|"encrypted db"| data
+  vault -.->|"optional sync"| turso
+  plugins -.->|"fetch index"| registry
+  ipc -.->|"assistant calls"| ai
+  plugins -->|"host API (permissioned)"| ssh
+  ci -.->|"builds app"| ui
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+  classDef job fill:#fbcfe8,stroke:#be185d,color:#0b1220
+  classDef store fill:#bbf7d0,stroke:#15803d,color:#0b1220
