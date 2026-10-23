@@ -1,11 +1,9 @@
 name: Deploy Docs to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'docs/**'
-
+  # Manual only: this is a fork with GitHub Pages disabled, so the upstream
+  # push trigger produced a guaranteed-failing run on every docs/** change
+  # (deploy-pages returns 404 "Ensure GitHub Pages has been enabled").
   workflow_dispatch:
 
 permissions:
