@@ -2,7 +2,7 @@
 name = "reach"
 version = "0.4.9"
 description = "Cross-platform SSH & Remote Management Tool"
-authors = ["Reach Contributors", "The Fire Dev LLC"]
+authors = ["Reach Contributors", "Tanner Osterkamp"]
 edition = "2021"
 license = "MIT"
 homepage = "https://github.com/thefiredev-cloud/Reach"
