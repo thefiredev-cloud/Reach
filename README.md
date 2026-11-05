@@ -19,14 +19,13 @@
   <a href="https://alexandrosnt.github.io/Reach/"><strong>Documentation</strong></a> · <a href="https://github.com/alexandrosnt/Reach/releases">Download</a> · <a href="https://github.com/alexandrosnt/Reach/issues">Report a Bug</a>
 </p>
 
-> **About this fork.** This is a fork of [alexandrosnt/Reach](https://github.com/alexandrosnt/Reach). Upstream is canonical for releases, issues, documentation and the current feature set. Issues are disabled here, so file bugs upstream.
+> **About this fork.** This is a fork of [alexandrosnt/Reach](https://github.com/alexandrosnt/Reach). Upstream is canonical for releases, issues, documentation and the current feature set. Issues are disabled here, so file bugs upstream. Fork contact: tanner@kodros.ai.
 >
-> The fork is based on upstream v0.4.9 (upstream has since reached v0.7.6) and adds four changes on top of that snapshot:
+> The fork is based on upstream v0.4.9 (upstream has since reached v0.7.6) and adds three changes on top of that snapshot:
 >
 > - **macOS terminal copy and paste.** The default Tauri menu bound Cmd+C and Cmd+V to its own Copy and Paste items and swallowed the keys before the terminal saw them. The fork builds a custom macOS menu whose Copy and Paste items have no accelerators and handles the keys in `Terminal.svelte`. It also vendors OpenSSL (`openssl-sys`) so the app builds without system OpenSSL headers. Upstream later fixed Cmd+V its own way in a newer release.
 > - **Vault password.** Setting or changing the vault password never worked in this snapshot, because the encrypted key was discarded at identity creation (upstream issue #25). The fork keeps the encrypted key, adds `VaultManager::change_password`, and returns a clear error when no password is set. Two unit tests cover it.
-> - **Marketplace registry URL.** The registry URL override is saved in the encrypted settings vault and reloaded on startup. The Marketplace panel has a gear icon to edit or reset it. The default registry is still upstream's. A seeded registry with three plugins lives in [reach-plugins-registry](https://github.com/thefiredev-cloud/reach-plugins-registry).
-> - **Support link.** A link in Settings → General points to the MeshVault skills pack storefront, because GitHub Sponsors is not enabled on this account. The repository's `.github/FUNDING.yml` is upstream's own file, so the Sponsor button on this fork goes to upstream's maintainer.
+> - **Marketplace registry URL.** The registry URL override is saved in the encrypted settings vault and reloaded on startup. The Marketplace panel has a gear icon to edit or reset it. The default registry is still upstream's. A registry index for this fork lives in [reach-plugins-registry](https://github.com/thefiredev-cloud/reach-plugins-registry). It is empty today.
 >
 > Installers and auto-updates from upstream do not include these changes. Build this fork from source to get them, or download the unsigned CI artifacts from the [Build workflow](https://github.com/thefiredev-cloud/Reach/actions/workflows/build.yml). The fork's bundle identifier is `com.thefiredev.reach` and its publisher is Tanner Osterkamp, so the operating system registers a fork build as a different app from upstream's `com.reach.desktop`. The in-app updater is disabled in this fork (`plugins.updater.endpoints` is empty): it would otherwise pull upstream releases over the fork. License metadata is MIT in `LICENSE`, `src-tauri/Cargo.toml` and `tauri.conf.json`, matching upstream's v0.7.4 correction.
 

@@ -7,7 +7,7 @@
 
 ## 1. Purpose
 
-Reach is a cross-platform SSH client and remote management tool. This repository is thefiredev-cloud's fork of alexandrosnt/Reach at upstream v0.4.9 with four fixes (macOS copy and paste, vault password change, a saved marketplace registry URL, a support link); upstream is canonical. The app has two halves joined by Tauri v2: a Svelte 5 single-page frontend, and a Rust backend on Tokio. The backend owns SSH (russh), SFTP, tunnels, a PTY, serial ports, monitoring, Ansible and OpenTofu runners, an encrypted vault, and a Luau plugin sandbox. The frontend calls Rust through `invoke` commands and listens to Tauri events for streams.
+Reach is a cross-platform SSH client and remote management tool. This repository is thefiredev-cloud's fork of alexandrosnt/Reach at upstream v0.4.9 with three fixes (macOS copy and paste, vault password change, a saved marketplace registry URL); upstream is canonical. The app has two halves joined by Tauri v2: a Svelte 5 single-page frontend, and a Rust backend on Tokio. The backend owns SSH (russh), SFTP, tunnels, a PTY, serial ports, monitoring, Ansible and OpenTofu runners, an encrypted vault, and a Luau plugin sandbox. The frontend calls Rust through `invoke` commands and listens to Tauri events for streams.
 
 ## 2. Whiteboard view
 
